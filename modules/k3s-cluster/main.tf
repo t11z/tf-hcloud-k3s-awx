@@ -20,11 +20,10 @@ resource "hcloud_server" "server" {
   server_type = var.server_type
   location    = var.location
   ssh_keys    = var.ssh_keys
-  user_data   = templatefile("${path.module}/scripts/install-k3s-server.sh", {
+  user_data = templatefile("${path.module}/scripts/install-k3s-server.sh", {
     server_index         = count.index
     cluster_token        = var.cluster_token
     cluster_name         = var.cluster_name
-    agent_ips            = join(",", hcloud_server.agent.*.ipv4_address)
     awx_install          = count.index == 0 ? true : false
     awx_operator_version = var.awx_operator_version
     domain_name          = var.domain_name

@@ -11,7 +11,7 @@ variable "ssh_keys" {
 
 variable "server_type" {
   type        = string
-  default     = "cx31"
+  default     = "cx11"
   description = "Hetzner Cloud server type"
 }
 

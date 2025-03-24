@@ -1,6 +1,6 @@
-output "load_balancer_ip" {
-  value       = hcloud_load_balancer.awx_lb.ipv4
-  description = "Public IP of the Load Balancer"
+output "server_ips" {
+  value       = hcloud_server.server.*.ipv4_address
+  description = "Public IPv4 addresses of all K3S server nodes"
 }
 
 output "awx_url" {

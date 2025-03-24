@@ -7,7 +7,6 @@ sleep 10
 SERVER_INDEX=${server_index}
 CLUSTER_TOKEN="${cluster_token}"
 CLUSTER_NAME="${cluster_name}"
-AGENT_IPS="${agent_ips}"
 INSTALL_AWX=${awx_install}
 
 # Write the token to disk

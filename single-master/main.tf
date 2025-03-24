@@ -37,6 +37,17 @@ module "k3s_cluster" {
   awx_operator_version = var.awx_operator_version
 }
 
+module "haproxy_lb" {
+  source         = "../modules/haproxy-lb"
+  cluster_name   = var.cluster_name
+  domain_name    = var.domain_name
+  backend_ips    = module.k3s_cluster.server_ips
+  backend_port   = var.awx_nodeport
+  server_type    = "cx11"
+  location       = var.location
+  ssh_keys       = var.ssh_keys
+}
+
 resource "null_resource" "get_awx_password" {
   depends_on = [module.k3s_cluster]
 
