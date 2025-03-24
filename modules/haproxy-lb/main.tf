@@ -1,3 +1,18 @@
+terraform {
+  required_providers {
+    hcloud = {
+      source  = "hetznercloud/hcloud"
+      version = "~> 1.43"
+    }
+    random = {
+      source = "hashicorp/random"
+    }
+    null = {
+      source = "hashicorp/null"
+    }
+  }
+}
+
 resource "hcloud_server" "lb" {
   name        = "${var.cluster_name}-lb"
   image       = "ubuntu-24.04"

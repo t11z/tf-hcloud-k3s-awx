@@ -43,33 +43,3 @@ resource "hcloud_server" "agent" {
     cluster_name   = var.cluster_name
   })
 }
-
-resource "hcloud_load_balancer" "awx_lb" {
-  name     = "${var.cluster_name}-lb"
-  location = var.location
-  load_balancer_type     = "lb11"
-}
-
-resource "hcloud_load_balancer_service" "https" {
-  load_balancer_id = hcloud_load_balancer.awx_lb.id
-  protocol         = "https"
-  listen_port      = 443
-  destination_port = var.awx_nodeport
-
-  http {
-    sticky_sessions = false
-    certificates    = [data.hcloud_uploaded_certificate.awx_cert.id]
-  }
-}
-
-resource "hcloud_load_balancer_target" "servers" {
-  count            = var.server_count
-  type             = "server"
-  server_id        = hcloud_server.server[count.index].id
-  load_balancer_id = hcloud_load_balancer.awx_lb.id
-  use_private_ip   = false
-}
-
-data "hcloud_uploaded_certificate" "awx_cert" {
-  name = var.certificate_name
-}
