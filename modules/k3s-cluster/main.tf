@@ -1,3 +1,18 @@
+terraform {
+  required_providers {
+    hcloud = {
+      source  = "hetznercloud/hcloud"
+      version = "~> 1.43"
+    }
+    random = {
+      source = "hashicorp/random"
+    }
+    null = {
+      source = "hashicorp/null"
+    }
+  }
+}
+
 resource "hcloud_server" "server" {
   count       = var.server_count
   name        = "${var.cluster_name}-server-${count.index + 1}"

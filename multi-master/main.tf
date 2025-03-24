@@ -4,8 +4,15 @@ terraform {
       source  = "hetznercloud/hcloud"
       version = "~> 1.43"
     }
+    random = {
+      source = "hashicorp/random"
+    }
+    null = {
+      source = "hashicorp/null"
+    }
   }
 }
+
 
 provider "hcloud" {
   token = var.hcloud_token
